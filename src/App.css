@@ -1,0 +1,28 @@
+.box {
+    width: 430px;
+    background-color: blue;
+    display: flex;
+
+}
+
+body {
+    background-image: url('/Users/minjilee/Project/weather-app/src/imgs/weather.jpg');
+    height: 100vh;
+    /* background-repeat: no-repeat; */
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction:column;
+}
+
+.weather-box {
+    border: 3px solid blue;
+    padding: 50px;
+    border-radius: 30px;
+    background-color: skyblue;
+}
