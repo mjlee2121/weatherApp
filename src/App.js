@@ -53,7 +53,7 @@ const App = () => {
 
   useEffect(() => {
     if (city===''){
-      console.log('mj no city')
+      setLoading(true)
       getCurrentLocation()
     }
     else{
