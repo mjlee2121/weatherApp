@@ -1,4 +1,5 @@
 import './App.css';
+import Sidebar from './component/Sidebar.js'
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { API_KEY } from './constants.js'
@@ -71,10 +72,12 @@ const App = () => {
     }
   }, [city]) // when []is empty, it activates as soon as it the App renders. 
 
-
   return (
     <div>
-        {loading ? (
+      <div className='sidebar'>
+        <Sidebar />
+      </div>
+      { loading ? (
         <div className='container'>
           <ClipLoader color='blue' loading={loading} size={150}></ClipLoader> 
         </div>) : !apiError ? (
@@ -83,10 +86,8 @@ const App = () => {
             <WeatherButton cities={cities} selectedCity={city} handleCityChange={handleCityChange}/>
           
           </div>
-        ) : (
-          apiError
-        )}
-        
+        ) : (apiError)
+      }  
         
       <div>
 
