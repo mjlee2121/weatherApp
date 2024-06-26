@@ -2,11 +2,13 @@ import './App.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { API_KEY } from './constants.js'
-import WeatherBox from './components/WeatherBox.js'
-import WeatherButton from './components/WeatherButton.js'
+import WeatherBox from './component/WeatherBox.js'
+import WeatherButton from './component/WeatherButton.js'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import ClipLoader from "react-spinners/ClipLoader"
 
 const App = () => {
+
   const [ weather, setWeather ]= useState(null)
   const cities =['Paris','New york','Boston', 'Seoul']
   const [city, setCity] = useState('')
@@ -22,24 +24,30 @@ const App = () => {
 
     })
   }
-
+  const handleCityChange = (city) => {
+    if (city == "current"){
+      setCity(null)
+    }else{
+      setCity(city)
+    }
+  }
   const getWeatherByCurrentLocation = async(lat, lon) => {
-      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       let response = await fetch(url)
       let data = await response.json()
 
-      console.log('data is :', data)
+      setWeather(data)
+      setLoading(false)
   }
   
-  const getWeatherByCity = async(city) => {
-    console.log('getting weather by city')
+  const getWeatherByCity = async() => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-    setLoading(true)
+    
     let response = await fetch(url)
     let data = await response.json()
-    console.log('data by city', data)
-    setLoading(false)
+    
     setWeather(data)
+    setLoading(false)
 
   }
 
@@ -47,7 +55,6 @@ const App = () => {
     if (city===''){
       console.log('mj no city')
       getCurrentLocation()
-      
     }
     else{
       getWeatherByCity(city)
@@ -64,7 +71,7 @@ const App = () => {
         (
         <div className='container'>
           <WeatherBox weather={weather}/>
-          <WeatherButton cities={cities} setCity={setCity}/>
+          <WeatherButton cities={cities} selectedCity={city} handleCityChange={handleCityChange}/>
           
         </div>
         )}
