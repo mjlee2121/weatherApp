@@ -7,6 +7,10 @@ import WeatherBox from './component/WeatherBox.js'
 import WeatherButton from './component/WeatherButton.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ClipLoader from "react-spinners/ClipLoader"
+import Home from './pages/Home'
+import WaterTemperature from './pages/WaterTemperature'
+import Weather from './pages/Weather'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 const cities =['Paris','New york','Boston', 'Seoul']
 
@@ -74,6 +78,11 @@ const App = () => {
 
   return (
     <div>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/weather' element={<Weather />} />
+        <Route path='/water_temperature' element={<WaterTemperature />} />
+      </Routes>
       <div className='sidebar'>
         <Sidebar />
       </div>
